@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neoprime Longlist</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%232E5F96%27/%3E%3Cpath d=%27M16 7 L25 25 L16 20 L7 25 Z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="shared.css">
+<style>
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:820px){.panels{grid-template-columns:1fr}}
+.filterbar{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:14px 16px;margin:22px 0 14px;box-shadow:var(--shadow)}
+.fgroup{display:flex;align-items:flex-start;gap:12px;padding:8px 0;
+  border-bottom:1px solid var(--line-2)}
+.fgroup:last-of-type{border-bottom:none;padding-bottom:0}
+.fgroup:first-of-type{padding-top:0}
+.flabel{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);
+  width:78px;flex-shrink:0;padding-top:6px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;
+  padding:5px 11px;border:1px solid var(--line);border-radius:20px;
+  background:var(--surface);color:var(--ink-2);cursor:pointer;
+  transition:background .12s,border-color .12s,color .12s}
+.chip:hover{border-color:var(--accent-line);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.searchrow{display:flex;gap:10px;align-items:center;margin-bottom:12px;
+  padding-bottom:12px;border-bottom:1px solid var(--line-2)}
+.searchrow input{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:7px;
+  background:var(--surface-2);color:var(--ink);font-family:inherit;font-size:13.5px}
+.searchrow input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.searchrow input::placeholder{color:var(--ink-3)}
+.count{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.reset{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:none;
+  border:none;color:var(--accent);cursor:pointer;padding:4px 8px;border-radius:5px}
+.reset:hover{background:var(--accent-soft)}
+table{min-width:1080px}
+.idx{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+.co{font-weight:600;font-size:14px;letter-spacing:-.005em;color:var(--ink);
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.co:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.co:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.ext{font-size:9px;opacity:.5;flex-shrink:0}
+.desc{color:var(--ink-3);font-size:12px;line-height:1.45;margin-top:3px;max-width:46ch}
+.rowtags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.geo{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;color:var(--ink-2)}
+.city{color:var(--ink-3);font-size:11px;display:block;font-family:"IBM Plex Sans",sans-serif}
+.amt{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;
+  text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .cur{color:var(--ink-3);font-size:11px}
+.dash{color:var(--ink-3)}
+.lead{font-size:12.5px;color:var(--ink-2);max-width:20ch}
+.ver{font-family:"IBM Plex Mono",monospace;font-size:10.5px;white-space:nowrap}
+.ver.y{color:var(--cool);font-weight:600} .ver.t{color:var(--ink-3)} .ver.yc{color:var(--accent)}
+.empty{padding:40px;text-align:center;color:var(--ink-3);font-size:13px}
+.tag.mini{font-size:9.5px;padding:1.5px 5px}
+</style></head><body>
+<div class="wrap">
+<nav>
+  <a href="index.html" aria-current="page">Companies · 46</a>
+  <a href="investors.html">Investors · 23</a>
+</nav>
+<header>
+  <div class="eyebrow">Longlist · Screening pass 1 · Rounds Sep 2025 – Aug 2026</div>
+  <h1>Neoprime Longlist</h1>
+  <p class="sub">Defence companies founded <b>2021 or later</b> that raised <b>Seed, Series&nbsp;A or Series&nbsp;B</b> in the last twelve months. Company names link to the official site where one is confirmed, otherwise to the YC profile or the source article.</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="panels">
+  <div class="panel"><h2>Where the crowding is — by category</h2><div id="catbars"></div></div>
+  <div class="panel"><h2>By stage · by geography</h2><div id="stagebars"></div></div>
+</div>
+
+<div class="filterbar">
+  <div class="searchrow">
+    <input type="search" id="q" placeholder="Search company, investor, city, description…" aria-label="Search companies">
+    <button class="reset" id="reset" type="button">Clear all</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="fgroup"><span class="flabel">Stage</span><div class="fchips" id="f-stage"></div></div>
+  <div class="fgroup"><span class="flabel">Geography</span><div class="fchips" id="f-geo"></div></div>
+  <div class="fgroup"><span class="flabel">Category</span><div class="fchips" id="f-cat"></div></div>
+  <div class="fgroup"><span class="flabel">Tags</span><div class="fchips" id="f-tag"></div></div>
+</div>
+
+<div class="tablebox">
+  <table><thead><tr>
+    <th class="s" data-k="id">#</th>
+    <th class="s" data-k="name">Company</th>
+    <th class="s" data-k="country">Geo</th>
+    <th class="s" data-k="founded">Founded</th>
+    <th class="s" data-k="stage">Stage</th>
+    <th class="s num" data-k="amount">Round</th>
+    <th class="s num" data-k="val">Valuation</th>
+    <th class="s" data-k="lead">Lead investor</th>
+    <th class="s" data-k="cat">Category</th>
+  </tr></thead><tbody id="tb"></tbody></table>
+</div>
+<div class="empty" id="empty" hidden>No companies match those filters.</div>
+
+<footer>
+  <p><b>Reading the columns.</b> <span class="ver y">2024&nbsp;✓</span> means the founding year is confirmed against a source — 17 rows now are. <span class="ver t">TBV</span> means unverified; check before scoring. <span class="ver yc">YC&nbsp;S2026</span> means the Y&nbsp;Combinator batch stands in for age.</p>
+  <p><b>Amounts are not normalised.</b> Euro and dollar figures sit in one column as their sources reported them, so sorting by round size compares a €30M row against a $30M row as equals. They are not.</p>
+  <p><b>This is roughly 60% of the real list.</b> The SEC Form D sweep, the SBIR and SAM.gov sweeps, and portfolio walks for a16z American Dynamism, Founders Fund and Shield Capital have not been run. Expect 30–60% more US companies once they are. Asia is absent; Israel is thin.</p>
+  <p><b>Known conflict.</b> Terra Industries is recorded at $34M — an $11.8M seed led by 8VC plus a $22M follow-on led by Lux. One source reports the seed closing at $52M in total. Unresolved.</p>
+</footer>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body></html>
